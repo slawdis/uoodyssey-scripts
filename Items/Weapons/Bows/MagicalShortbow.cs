@@ -17,9 +17,9 @@ namespace Server.Items
 		public override WeaponAbility FourthAbility{ get{ return WeaponAbility.DoubleShot; } }
 		public override WeaponAbility FifthAbility{ get{ return WeaponAbility.InfectiousStrike; } }
 
-		public override int AosStrengthReq{ get{ return 45; } }
-		public override int AosMinDamage{ get{ return 9; } }
-		public override int AosMaxDamage{ get{ return 13; } }
+		public override int AosStrengthReq{ get{ return 25; } }
+		public override int AosMinDamage{ get{ return 8; } }
+		public override int AosMaxDamage{ get{ return 12; } }
 		public override int AosSpeed{ get{ return 38; } }
 		public override float MlSpeed{ get{ return 3.00f; } }
 
@@ -28,7 +28,7 @@ namespace Server.Items
 		public override int OldMaxDamage{ get{ return 13; } }
 		public override int OldSpeed{ get{ return 38; } }
 
-		public override int DefMaxRange{ get{ return 10; } }
+		public override int DefMaxRange{ get{ return 7; } }
 
 		public override int InitMinHits{ get{ return 41; } }
 		public override int InitMaxHits{ get{ return 90; } }

@@ -17,11 +17,11 @@ namespace Server.Items
 		public override WeaponAbility FourthAbility{ get{ return WeaponAbility.ZapManaStrike; } }
 		public override WeaponAbility FifthAbility{ get{ return WeaponAbility.ZapDexStrike; } }
 
-		public override int AosStrengthReq{ get{ return 30; } }
-		public override int AosMinDamage{ get{ return Core.ML ? 8 : 10; } }
-		public override int AosMaxDamage{ get{ return 12; } }
+		public override int AosStrengthReq{ get{ return 65; } }
+		public override int AosMinDamage{ get{ return Core.ML ? 10 : 10; } }
+		public override int AosMaxDamage{ get{ return 14; } }
 		public override int AosSpeed{ get{ return 41; } }
-		public override float MlSpeed{ get{ return 2.75f; } }
+		public override float MlSpeed{ get{ return 3.00f; } }
 
 		public override int OldStrengthReq{ get{ return 30; } }
 		public override int OldMinDamage{ get{ return 10; } }
