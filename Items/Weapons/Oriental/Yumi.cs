@@ -38,7 +38,7 @@ namespace Server.Items
 		[Constructable]
 		public Yumi() : base( 0x27A5 )
 		{
-			Weight = 9.0;
+			Weight = 11.0;
 			Layer = Layer.TwoHanded;
 			Resource = CraftResource.RegularWood;
 		}

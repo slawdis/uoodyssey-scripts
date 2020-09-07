@@ -28,7 +28,7 @@ namespace Server.Items
 		public override int OldMaxDamage{ get{ return 12; } }
 		public override int OldSpeed{ get{ return 41; } }
 
-		public override int DefMaxRange{ get{ return 7; } }
+		public override int DefMaxRange{ get{ return 6; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 80; } }
@@ -36,7 +36,7 @@ namespace Server.Items
 		[Constructable]
 		public RepeatingCrossbow() : base( 0x26C3 )
 		{
-			Weight = 6.0;
+			Weight = 10.0;
 			Resource = CraftResource.RegularWood;
 		}
 

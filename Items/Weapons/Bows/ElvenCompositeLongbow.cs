@@ -38,7 +38,7 @@ namespace Server.Items
 		[Constructable]
 		public ElvenCompositeLongbow() : base( 0x2D1E )
 		{
-			Weight = 5.0;
+			Weight = 13.0;
 			Name = "woodland longbow";
 			Resource = CraftResource.RegularWood;
 		}

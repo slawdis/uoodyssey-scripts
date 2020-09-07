@@ -36,7 +36,7 @@ namespace Server.Items
 		[Constructable]
 		public Crossbow() : base( 0xF50 )
 		{
-			Weight = 7.0;
+			Weight = 8.0;
 			Layer = Layer.TwoHanded;
 			Resource = CraftResource.RegularWood;
 		}

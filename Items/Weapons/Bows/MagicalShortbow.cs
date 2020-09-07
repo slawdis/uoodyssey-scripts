@@ -28,7 +28,7 @@ namespace Server.Items
 		public override int OldMaxDamage{ get{ return 13; } }
 		public override int OldSpeed{ get{ return 38; } }
 
-		public override int DefMaxRange{ get{ return 7; } }
+		public override int DefMaxRange{ get{ return 6; } }
 
 		public override int InitMinHits{ get{ return 41; } }
 		public override int InitMaxHits{ get{ return 90; } }
@@ -37,7 +37,7 @@ namespace Server.Items
 		public MagicalShortbow() : base( 0x2D2B )
 		{
 			Name = "woodland shortbow";
-			Weight = 6.0;
+			Weight = 5.0;
 			Resource = CraftResource.RegularWood;
 		}
 

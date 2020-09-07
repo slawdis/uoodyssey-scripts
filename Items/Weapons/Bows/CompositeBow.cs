@@ -28,7 +28,7 @@ namespace Server.Items
 		public override int OldMaxDamage{ get{ return 17; } }
 		public override int OldSpeed{ get{ return 25; } }
 
-		public override int DefMaxRange{ get{ return 9; } }
+		public override int DefMaxRange{ get{ return 8; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 70; } }
@@ -38,7 +38,7 @@ namespace Server.Items
 		[Constructable]
 		public CompositeBow() : base( 0x26C2 )
 		{
-			Weight = 5.0;
+			Weight = 9.0;
 			Resource = CraftResource.RegularWood;
 		}
 

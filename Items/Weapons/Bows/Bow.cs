@@ -38,7 +38,7 @@ namespace Server.Items
 		[Constructable]
 		public Bow() : base( 0x13B2 )
 		{
-			Weight = 6.0;
+			Weight = 7.0;
 			Layer = Layer.TwoHanded;
 			Resource = CraftResource.RegularWood;
 		}
