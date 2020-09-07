@@ -17,18 +17,18 @@ namespace Server.Items
 		public override WeaponAbility FourthAbility{ get{ return WeaponAbility.ZapDexStrike; } }
 		public override WeaponAbility FifthAbility{ get{ return WeaponAbility.ZapManaStrike; } }
 
-		public override int AosStrengthReq{ get{ return 45; } }
-		public override int AosMinDamage{ get{ return Core.ML ? 13 : 15; } }
-		public override int AosMaxDamage{ get{ return 17; } }
+		public override int AosStrengthReq{ get{ return 55; } }
+		public override int AosMinDamage{ get{ return Core.ML ? 12 : 12; } }
+		public override int AosMaxDamage{ get{ return 16; } }
 		public override int AosSpeed{ get{ return 25; } }
-		public override float MlSpeed{ get{ return 4.00f; } }
+		public override float MlSpeed{ get{ return 3.25f; } }
 
 		public override int OldStrengthReq{ get{ return 45; } }
 		public override int OldMinDamage{ get{ return 15; } }
 		public override int OldMaxDamage{ get{ return 17; } }
 		public override int OldSpeed{ get{ return 25; } }
 
-		public override int DefMaxRange{ get{ return 10; } }
+		public override int DefMaxRange{ get{ return 8; } }
 
 		public override int InitMinHits{ get{ return 31; } }
 		public override int InitMaxHits{ get{ return 70; } }
@@ -38,7 +38,7 @@ namespace Server.Items
 		[Constructable]
 		public CompositeBow() : base( 0x26C2 )
 		{
-			Weight = 5.0;
+			Weight = 9.0;
 			Resource = CraftResource.RegularWood;
 		}
 
