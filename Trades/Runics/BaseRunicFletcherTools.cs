@@ -29,7 +29,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public RunicFletcherTools( CraftResource resource ) : base( resource, 0x5444 )
+		public RunicFletcherTools( CraftResource resource ) : base( resource, 0x55DE )
 		{
 			Weight = 2.0;
 			Hue = CraftResources.GetHue( resource );
@@ -37,7 +37,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public RunicFletcherTools( CraftResource resource, int uses ) : base( resource, uses, 0x5444 )
+		public RunicFletcherTools( CraftResource resource, int uses ) : base( resource, uses, 0x55DE )
 		{
 			Weight = 2.0;
 			Hue = CraftResources.GetHue( resource );

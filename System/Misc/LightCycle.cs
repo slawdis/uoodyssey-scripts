@@ -8,9 +8,9 @@ namespace Server
 	public class LightCycle
 	{
 		public const int DayLevel = 0;
-		public const int NightLevel = 20;
-		public const int DungeonLevel = 26;
-		public const int CaveLevel = 26;
+		public const int NightLevel = 26;
+		public const int DungeonLevel = 30;
+		public const int CaveLevel = 30;
 		public const int JailLevel = 13;
 
 		private static int m_LevelOverride = int.MinValue;
@@ -102,17 +102,23 @@ namespace Server
 					return DayLevel + (((((hours - 22) * 60) + minutes) * (NightLevel - DayLevel)) / 120);
 			 */
 
-			if ( hours < 6 )
+			if ( hours < 5 )
 				return NightLevel;
 
 			if ( hours < 8 )
-				return NightLevel + (((((hours - 6) * 60) + minutes) * (DayLevel - NightLevel)) / 120);
-
-			if ( hours < 18 )
+				//Dawn Level: Slowly reduces the Night Level (26) towards Day Level (0).
+				//Calcuation: Converts current in-game hours - 5 (full night) adds the minutes, divides from minutes
+				//to hours again. Then multiplies this result by 8.66. 8.66 is the number of times 26 can be divided by 3.   
+				return NightLevel - Convert.ToInt32(Math.Ceiling(((((hours - 5) * 60) + minutes) /60) * 8.66));
+				
+			if ( hours < 17 )
 				return DayLevel;
 
 			if ( hours < 20 )
-				return DayLevel + (((((hours - 18) * 60) + minutes) * (NightLevel - DayLevel)) / 120);
+				return DayLevel + Convert.ToInt32(Math.Ceiling(((((hours - 17) * 60) + minutes) /60) * 8.66));
+
+			if ( hours < 24 )
+				return NightLevel;
 
 			return NightLevel; // should never be
 		}

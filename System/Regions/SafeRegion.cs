@@ -31,6 +31,9 @@ namespace Server.Regions
 
 		public override bool AllowHarmful( Mobile from, Mobile target )
 		{
+			if ( from is Warriors && target is Warriors )
+				return true;
+
 			return false;
 		}
 
@@ -54,7 +57,7 @@ namespace Server.Regions
 			{
 				LoggingFunctions.LogRegions( m, this.Name, "enter" );
 			}
-			else if ( m is BaseCreature && !(m is BaseVendor) && !(m is Citizens) ) // WATER CREATURES GO UNDER THE SURFACE
+			else if ( m is BaseCreature && !(m is SpellCritter) && !(m is CorpseCritter) && !(m is BaseVendor) && !(m is Citizens) ) // WATER CREATURES GO UNDER THE SURFACE
 			{
 				BaseCreature bc = (BaseCreature)m;
 				if ( bc.ControlMaster == null && 

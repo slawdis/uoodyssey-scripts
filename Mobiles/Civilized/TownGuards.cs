@@ -506,12 +506,12 @@ namespace Server.Mobiles
 
 			if ( Server.Misc.MyServerSettings.GuardsSentenceDeath() || ( m is BaseCreature && ((BaseCreature)m).ControlMaster == null ) )
 			{
-				Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
+				//Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
 				//Effects.PlaySound( this, this.Map, 0x201 );
 				this.Location = m.Location;
 				this.Combatant = m;
 				this.Warmode = true;
-				Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
+				//Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
 				//Effects.PlaySound( this, this.Map, 0x201 );
 			}
 

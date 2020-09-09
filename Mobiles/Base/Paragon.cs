@@ -2,6 +2,7 @@ using System;
 using Server;
 using Server.Items;
 using Server.Misc;
+using Server.Regions;
 
 namespace Server.Mobiles
 {
@@ -137,6 +138,18 @@ namespace Server.Mobiles
 		public static bool CheckConvert( BaseCreature bc, Point3D location, Map m )
 		{
 			if ( !Core.AOS )
+				return false;
+
+			if ( bc.Fame < 1000 )
+				return false;
+
+			if ( bc.EmoteHue == 123 )
+				return false;
+
+			if ( bc.Region is GargoyleRegion )
+				return false;
+
+			if ( bc.Region.IsPartOf( "the Castle of the Black Knight" ) )
 				return false;
 
 			if ( Array.IndexOf( Maps, m ) == -1 )

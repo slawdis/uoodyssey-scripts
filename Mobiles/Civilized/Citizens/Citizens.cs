@@ -46,14 +46,12 @@ namespace Server.Mobiles
 		public override bool InitialInnocent{ get{ return true; } }
 		public override bool DeleteCorpseOnDeath{ get{ return true; } }
 
-		private DateTime m_NextTalk;
+		public DateTime m_NextTalk;
 		public DateTime NextTalk{ get{ return m_NextTalk; } set{ m_NextTalk = value; } }
 
 		[Constructable]
 		public Citizens() : base( AIType.AI_Citizen, FightMode.None, 10, 1, 0.2, 0.4 )
 		{
-			TextInfo cultInfo = new CultureInfo("en-US", false).TextInfo;
-
 			if ( Female = Utility.RandomBool() ) 
 			{ 
 				Body = 401; 
@@ -72,6 +70,61 @@ namespace Server.Mobiles
 				case 1: Server.Misc.IntelligentAction.DressUpFighters( this, "", false );	CitizenType = 2;	break;
 				case 2: Server.Misc.IntelligentAction.DressUpRogues( this, "", false );		CitizenType = 3;	break;
 			}
+
+			CitizenCost = 0;
+			CitizenService = 0;
+
+			SetupCitizen();
+
+			CantWalk = true;
+			Title = TavernPatrons.GetTitle();
+			Hue = Utility.RandomSkinColor();
+			Utility.AssignRandomHair( this );
+			SpeechHue = Utility.RandomTalkHue();
+			NameHue = Utility.RandomOrangeHue();
+			AI = AIType.AI_Citizen;
+			FightMode = FightMode.None;
+
+			SetStr( 386, 400 );
+			SetDex( 151, 165 );
+			SetInt( 161, 175 );
+
+			SetHits( 300, 400 );
+
+			SetDamage( 8, 10 );
+
+			SetDamageType( ResistanceType.Physical, 100 );
+
+			SetResistance( ResistanceType.Physical, 35, 45 );
+			SetResistance( ResistanceType.Fire, 25, 30 );
+			SetResistance( ResistanceType.Cold, 25, 30 );
+			SetResistance( ResistanceType.Poison, 10, 20 );
+			SetResistance( ResistanceType.Energy, 10, 20 );
+
+			SetSkill( SkillName.DetectHidden, 60.0, 82.5 );
+			SetSkill( SkillName.Anatomy, 60.0, 82.5 );
+			SetSkill( SkillName.Poisoning, 60.0, 82.5 );
+			SetSkill( SkillName.MagicResist, 60.0, 82.5 );
+			SetSkill( SkillName.Tactics, 60.0, 82.5 );
+			SetSkill( SkillName.Wrestling, 60.0, 82.5 );
+			SetSkill( SkillName.Swords, 60.0, 82.5 );
+			SetSkill( SkillName.Fencing, 60.0, 82.5 );
+			SetSkill( SkillName.Macing, 60.0, 82.5 );
+
+			Fame = 0;
+			Karma = 0;
+			VirtualArmor = 30;
+
+			int HairColor = Utility.RandomHairHue();
+			HairHue = HairColor;
+			FacialHairHue = HairColor;
+
+			if ( this is HouseVisitor && Backpack != null ){ Backpack.Delete(); }
+		}
+
+		public void SetupCitizen()
+		{
+			TextInfo cultInfo = new CultureInfo("en-US", false).TextInfo;
 
 			if ( Backpack != null ){ Backpack.Delete(); }
 			Container pack = new Backpack();
@@ -168,9 +221,6 @@ namespace Server.Mobiles
 
 			if ( CitizenRumor == null ){ CitizenRumor = preface + " " + Server.Misc.TavernPatrons.CommonTalk( "", city, dungeon, this, adventurer, true ) + "."; }
 
-			CitizenCost = 0;
-			CitizenService = 0;
-
 			if ( this is HouseVisitor )
 			{
 				CitizenService = 0;
@@ -178,6 +228,83 @@ namespace Server.Mobiles
 			else if ( CitizenType == 1 )
 			{
 				if ( Utility.RandomMinMax( 1, 10 ) == 1 ){ CitizenService = Utility.RandomMinMax( 1, 8 ); }
+			}
+			else if ( CitizenType == 4 ) // SMITH
+			{
+				CitizenService = 0;
+				CitizenType = 0;
+				switch ( Utility.RandomMinMax( 1, 50 ) )
+				{
+					case 1: CitizenService = 1;		CitizenType = 2;	break;
+					case 2: CitizenService = 2;		CitizenType = 2;	break;
+					case 3: CitizenService = 20;	CitizenType = 20;	break;
+					case 4: CitizenService = 20;	CitizenType = 20;	break;
+					case 5: CitizenService = 20;	CitizenType = 20;	break;
+				}
+			}
+			else if ( CitizenType == 5 ) // LUMBERJACK
+			{
+				CitizenService = 0;
+				CitizenType = 0;
+				switch ( Utility.RandomMinMax( 1, 50 ) )
+				{
+					case 1: CitizenService = 3;		CitizenType = 2;	break;
+					case 2: CitizenService = 4;		CitizenType = 2;	break;
+					case 3: CitizenService = 21;	CitizenType = 21;	break;
+					case 4: CitizenService = 21;	CitizenType = 21;	break;
+					case 5: CitizenService = 21;	CitizenType = 21;	break;
+				}
+			}
+			else if ( CitizenType == 6 ) // LEATHER
+			{
+				CitizenService = 0;
+				CitizenType = 0;
+				switch ( Utility.RandomMinMax( 1, 50 ) )
+				{
+					case 1: CitizenService = 2;		CitizenType = 22;	break;
+					case 2: CitizenService = 2;		CitizenType = 22;	break;
+					case 3: CitizenService = 22;	CitizenType = 22;	break;
+					case 4: CitizenService = 22;	CitizenType = 22;	break;
+					case 5: CitizenService = 22;	CitizenType = 22;	break;
+				}
+			}
+			else if ( CitizenType == 7 ) // MINER
+			{
+				CitizenService = 0;
+				CitizenType = 0;
+				switch ( Utility.RandomMinMax( 1, 50 ) )
+				{
+					case 1: CitizenService = 1;		CitizenType = 2;	break;
+					case 2: CitizenService = 2;		CitizenType = 2;	break;
+					case 3: CitizenService = 23;	CitizenType = 23;	break;
+					case 4: CitizenService = 23;	CitizenType = 23;	break;
+					case 5: CitizenService = 23;	CitizenType = 23;	break;
+				}
+			}
+			else if ( CitizenType == 8 ) // SMELTER
+			{
+				CitizenService = 0;
+				CitizenType = 0;
+				switch ( Utility.RandomMinMax( 1, 50 ) )
+				{
+					case 1: CitizenService = 1;		CitizenType = 2;	break;
+					case 2: CitizenService = 2;		CitizenType = 2;	break;
+					case 3: CitizenService = 20;	CitizenType = 20;	break;
+					case 4: CitizenService = 20;	CitizenType = 20;	break;
+					case 5: CitizenService = 23;	CitizenType = 23;	break;
+					case 6: CitizenService = 23;	CitizenType = 23;	break;
+				}
+			}
+			else if ( CitizenType == 9 ) // ALCHEMIST
+			{
+				CitizenService = 0;
+				CitizenType = 0;
+				switch ( Utility.RandomMinMax( 1, 50 ) )
+				{
+					case 1: CitizenService = 24;	CitizenType = 24;	break;
+					case 2: CitizenService = 24;	CitizenType = 24;	break;
+					case 3: CitizenService = 24;	CitizenType = 24;	break;
+				}
 			}
 			else
 			{
@@ -244,6 +371,348 @@ namespace Server.Mobiles
 					case 5:	CitizenPhrase = phrase + " I have " + aty1 + " I " + aty2 + " on some " + adventurer + " in " + Clues + " that I am " + aty3 + " for G~G~G~G~G gold."; break;
 				}
 				CitizenPhrase = CitizenPhrase + " You can look in my backpack to examine the item if you wish. If you want to trade, then hand me the gold and I will give you the item.";
+			}
+			else if ( CitizenType == 20 && CitizenService == 20 )
+			{
+				dungeon = RandomThings.MadeUpDungeon();
+				city = RandomThings.MadeUpCity();
+
+				CrateOfMetal crate = new CrateOfMetal();
+
+				int ingot = Utility.RandomMinMax( 1, 65536 );
+
+				string metal;
+				int steel;
+				int hue;
+				int qty;
+				int cost;
+
+				if ( ingot >= 32768 ){ metal = "iron"; steel = 0x5094; hue = 0; qty = 80; cost = 2; }
+				else if ( ingot >= 16384 ){ metal = "dull copper"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "dull copper", "", 0 ); qty = 75; cost = 4; }
+				else if ( ingot >= 8192 ){ metal = "shadow iron"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "shadow iron", "", 0 ); qty = 70; cost = 6; }
+				else if ( ingot >= 4096 ){ metal = "copper"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "copper", "", 0 ); qty = 65; cost = 8; }
+				else if ( ingot >= 2048 ){ metal = "bronze"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "bronze", "", 0 ); qty = 60; cost = 10; }
+				else if ( ingot >= 1024 ){ metal = "gold"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "gold", "", 0 ); qty = 55; cost = 12; }
+				else if ( ingot >= 512 ){ metal = "agapite"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "agapite", "", 0 ); qty = 50; cost = 14; }
+				else if ( ingot >= 256 ){ metal = "verite"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "verite", "", 0 ); qty = 45; cost = 16; }
+				else if ( ingot >= 128 ){ metal = "valorite"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "valorite", "", 0 ); qty = 40; cost = 18; }
+				else if ( ingot >= 64 ){ metal = "nepturite"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "nepturite", "", 0 ); qty = 35; cost = 20; }
+				else if ( ingot >= 32 ){ metal = "obsidian"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "obsidian", "", 0 ); qty = 30; cost = 22; }
+				else if ( ingot >= 16 ){ metal = "steel"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "steel", "", 0 ); qty = 25; cost = 24; }
+				else if ( ingot >= 8 ){ metal = "brass"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "brass", "", 0 ); qty = 20; cost = 26; }
+				else if ( ingot >= 4 ){ metal = "mithril"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "mithril", "", 0 ); qty = 15; cost = 28; }
+				else if ( ingot >= 2 ){ metal = "xormite"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "xormite", "", 0 ); qty = 10; cost = 30; }
+				else { metal = "dwarven"; steel = 0x5095; hue = MaterialInfo.GetMaterialColor( "dwarven", "", 0 ); qty = 5; cost = 32; }
+
+				crate.CrateQty = Utility.RandomMinMax( qty*5, qty*15 );
+				crate.CrateItem = metal;
+				crate.Hue = hue;
+				crate.ItemID = steel;
+				crate.Name = "crate of " + metal + " ingots";
+				crate.Weight = crate.CrateQty * 0.1;
+				CitizenCost = crate.CrateQty * cost;
+
+				string dug = "smelted";
+				switch ( Utility.RandomMinMax( 0, 5 ) )
+				{
+					case 0:	dug = "mined"; break;
+					case 1:	dug = "smelted"; break;
+					case 2:	dug = "forged"; break;
+					case 3:	dug = "dug up"; break;
+					case 4:	dug = "excavated"; break;
+					case 5:	dug = "formed"; break;
+				}
+
+				string sell = "willing to part with"; if (Utility.RandomBool() ){ sell = "willing to trade"; } else if (Utility.RandomBool() ){ sell = "willing to sell"; }
+				string cave = "cave"; if (Utility.RandomBool() ){ cave = "mine"; }
+
+				switch ( Utility.RandomMinMax( 0, 5 ) )
+				{
+					case 0:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ingots I " + dug + " in a " + cave + " near " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 1:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ingots I " + dug + " in a " + cave + " outside of " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 2:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ingots I " + dug + " in a " + cave + " by " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 3:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ingots I " + dug + " in a " + cave + " near " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 4:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ingots I " + dug + " in a " + cave + " by " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 5:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ingots I " + dug + " in a " + cave + " outside of " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+				}
+				CitizenPhrase = CitizenPhrase + " You can look in my backpack to examine the ingots if you wish. If you want to trade, then hand me the gold and I will give you the ingots.";
+
+				PackItem( crate );
+			}
+			else if ( CitizenType == 21 && CitizenService == 21 )
+			{
+				bool isLogs = Utility.RandomBool();
+
+				string contents = "boards";
+					if ( isLogs ){ contents = "logs"; }
+
+				dungeon = RandomThings.MadeUpDungeon();
+				city = RandomThings.MadeUpCity();
+
+				int boards = Utility.RandomMinMax( 1, 65536 );
+
+				string wood;
+				int tree;
+				int hue;
+				int qty;
+				int cost;
+
+				if ( boards >= 32768 ){ wood = "regular"; tree = 0x5088; hue = 0; qty = 80; cost = 2; }
+				else if ( boards >= 16384 ){ wood = "ash"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "ash", "", 0 ); qty = 75; cost = 4; }
+				else if ( boards >= 8192 ){ wood = "cherry"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "cherry", "", 0 ); qty = 70; cost = 6; }
+				else if ( boards >= 4096 ){ wood = "ebony"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "ebony", "", 0 ); qty = 65; cost = 8; }
+				else if ( boards >= 2048 ){ wood = "golden oak"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "golden oak", "", 0 ); qty = 60; cost = 10; }
+				else if ( boards >= 1024 ){ wood = "hickory"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "hickory", "", 0 ); qty = 55; cost = 12; }
+				else if ( boards >= 512 ){ wood = "mahogany"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "mahogany", "", 0 ); qty = 50; cost = 14; }
+				else if ( boards >= 256 ){ wood = "oak"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "oak", "", 0 ); qty = 45; cost = 16; }
+				else if ( boards >= 128 ){ wood = "pine"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "pine", "", 0 ); qty = 40; cost = 18; }
+				else if ( boards >= 64 ){ wood = "ghostwood"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "ghostwood", "", 0 ); qty = 35; cost = 20; }
+				else if ( boards >= 32 ){ wood = "rosewood"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "rosewood", "", 0 ); qty = 30; cost = 22; }
+				else if ( boards >= 16 ){ wood = "walnut"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "walnut", "", 0 ); qty = 25; cost = 24; }
+				else if ( boards >= 8 ){ wood = "petrified"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "petrified", "", 0 ); qty = 20; cost = 26; }
+				else if ( boards >= 4 ){ wood = "driftwood"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "driftwood", "", 0 ); qty = 15; cost = 28; }
+				else { wood = "elven"; tree = 0x5085; hue = MaterialInfo.GetMaterialColor( "elven", "", 0 ); qty = 10; cost = 30; }
+
+				if ( isLogs )
+				{
+					if ( tree == 0x5088 ){ tree = 0x5097; }
+					else { tree = 0x5096; }
+				}
+
+				Item box = null;
+				int amount = 0;
+				if ( isLogs )
+				{
+					box = new CrateOfLogs();
+					CrateOfLogs crate = (CrateOfLogs)box;
+					crate.CrateQty = Utility.RandomMinMax( qty*5, qty*15 );
+					amount = crate.CrateQty;
+					crate.CrateItem = wood;
+					crate.Hue = hue;
+					crate.ItemID = tree;
+					crate.Name = "crate of " + wood + " " + contents + "";
+					crate.Weight = crate.CrateQty * 0.1;
+					CitizenCost = crate.CrateQty * cost;
+				}
+				else
+				{
+					box = new CrateOfWood();
+					CrateOfWood crate = (CrateOfWood)box;
+					crate.CrateQty = Utility.RandomMinMax( qty*5, qty*15 );
+					amount = crate.CrateQty;
+					crate.CrateItem = wood;
+					crate.Hue = hue;
+					crate.ItemID = tree;
+					crate.Name = "crate of " + wood + " " + contents + "";
+					crate.Weight = crate.CrateQty * 0.1;
+					CitizenCost = crate.CrateQty * cost;
+				}
+
+				string chop = "chopped";
+				switch ( Utility.RandomMinMax( 0, 2 ) )
+				{
+					case 0:	chop = "chopped"; break;
+					case 1:	chop = "cut"; break;
+					case 2:	chop = "logged"; break;
+				}
+
+				string sell = "willing to part with"; if (Utility.RandomBool() ){ sell = "willing to trade"; } else if (Utility.RandomBool() ){ sell = "willing to sell"; }
+				string forest = "woods"; if (Utility.RandomBool() ){ forest = "forest"; }
+
+				switch ( Utility.RandomMinMax( 0, 5 ) )
+				{
+					case 0:	CitizenPhrase = phrase + " I have " + amount + " " + wood + " " + contents + " I " + chop + " in the " + forest + " near " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 1:	CitizenPhrase = phrase + " I have " + amount + " " + wood + " " + contents + " I " + chop + " in the " + forest + " outside of " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 2:	CitizenPhrase = phrase + " I have " + amount + " " + wood + " " + contents + " I " + chop + " in the " + forest + " by " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 3:	CitizenPhrase = phrase + " I have " + amount + " " + wood + " " + contents + " I " + chop + " in the " + forest + " near " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 4:	CitizenPhrase = phrase + " I have " + amount + " " + wood + " " + contents + " I " + chop + " in the " + forest + " by " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 5:	CitizenPhrase = phrase + " I have " + amount + " " + wood + " " + contents + " I " + chop + " in the " + forest + " outside of " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+				}
+				CitizenPhrase = CitizenPhrase + " You can look in my backpack to examine the " + contents + " if you wish. If you want to trade, then hand me the gold and I will give you the " + contents + ".";
+
+				PackItem( box );
+			}
+			else if ( CitizenType == 22 && CitizenService == 22 )
+			{
+				dungeon = RandomThings.MadeUpDungeon();
+				city = RandomThings.MadeUpCity();
+
+				CrateOfLeather crate = new CrateOfLeather();
+
+				int skin = Utility.RandomMinMax( 1, 65536 );
+
+				string flesh;
+				int hide;
+				int hue;
+				int qty;
+				int cost;
+
+				if ( skin >= 32768 ){ flesh = "regular"; hide = 0x5092; hue = 0; qty = 80; cost = 2; }
+				else if ( skin >= 16384 ){ flesh = "deep sea"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "deep sea", "", 0 ); qty = 75; cost = 4; }
+				else if ( skin >= 8192 ){ flesh = "lizard"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "lizard", "", 0 ); qty = 70; cost = 6; }
+				else if ( skin >= 4096 ){ flesh = "serpent"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "serpent", "", 0 ); qty = 65; cost = 8; }
+				else if ( skin >= 2048 ){ flesh = "necrotic"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "necrotic", "", 0 ); qty = 60; cost = 10; }
+				else if ( skin >= 1024 ){ flesh = "volcanic"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "volcanic", "", 0 ); qty = 55; cost = 12; }
+				else if ( skin >= 512 ){ flesh = "frozen"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "frozen", "", 0 ); qty = 50; cost = 14; }
+				else if ( skin >= 256 ){ flesh = "goliath"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "goliath", "", 0 ); qty = 45; cost = 16; }
+				else if ( skin >= 128 ){ flesh = "draconic"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "draconic", "", 0 ); qty = 40; cost = 18; }
+				else if ( skin >= 64 ){ flesh = "hellish"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "hellish", "", 0 ); qty = 35; cost = 20; }
+				else if ( skin >= 32 ){ flesh = "dinosaur"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "dinosaur", "", 0 ); qty = 30; cost = 22; }
+				else { flesh = "alien"; hide = 0x5093; hue = MaterialInfo.GetMaterialColor( "alien", "", 0 ); qty = 10; cost = 30; }
+
+				crate.CrateQty = Utility.RandomMinMax( qty*5, qty*15 );
+				crate.CrateItem = flesh;
+				crate.Hue = hue;
+				crate.ItemID = hide;
+				crate.Name = "crate of " + flesh + " leather";
+				crate.Weight = crate.CrateQty * 0.1;
+				CitizenCost = crate.CrateQty * cost;
+
+				string carve = "skinned";
+				switch ( Utility.RandomMinMax( 0, 2 ) )
+				{
+					case 0:	carve = "skinned"; break;
+					case 1:	carve = "tanned"; break;
+					case 2:	carve = "gathered"; break;
+				}
+
+				string sell = "willing to part with"; if (Utility.RandomBool() ){ sell = "willing to trade"; } else if (Utility.RandomBool() ){ sell = "willing to sell"; }
+
+				switch ( Utility.RandomMinMax( 0, 5 ) )
+				{
+					case 0:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + flesh + " leather I " + carve + " near " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 1:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + flesh + " leather I " + carve + " outside of " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 2:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + flesh + " leather I " + carve + " by " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 3:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + flesh + " leather I " + carve + " near " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 4:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + flesh + " leather I " + carve + " by " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 5:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + flesh + " leather I " + carve + " outside of " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+				}
+				CitizenPhrase = CitizenPhrase + " You can look in my backpack to examine the leather if you wish. If you want to trade, then hand me the gold and I will give you the leather.";
+
+				PackItem( crate );
+			}
+			else if ( CitizenType == 23 && CitizenService == 23 )
+			{
+				dungeon = RandomThings.MadeUpDungeon();
+				city = RandomThings.MadeUpCity();
+
+				CrateOfOre crate = new CrateOfOre();
+
+				int ingot = Utility.RandomMinMax( 1, 65536 );
+
+				string metal;
+				int steel;
+				int hue;
+				int qty;
+				int cost;
+
+				if ( ingot >= 32768 ){ metal = "iron"; steel = 0x5084; hue = 0; qty = 80; cost = 2; }
+				else if ( ingot >= 16384 ){ metal = "dull copper"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "dull copper", "", 0 ); qty = 75; cost = 4; }
+				else if ( ingot >= 8192 ){ metal = "shadow iron"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "shadow iron", "", 0 ); qty = 70; cost = 6; }
+				else if ( ingot >= 4096 ){ metal = "copper"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "copper", "", 0 ); qty = 65; cost = 8; }
+				else if ( ingot >= 2048 ){ metal = "bronze"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "bronze", "", 0 ); qty = 60; cost = 10; }
+				else if ( ingot >= 1024 ){ metal = "gold"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "gold", "", 0 ); qty = 55; cost = 12; }
+				else if ( ingot >= 512 ){ metal = "agapite"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "agapite", "", 0 ); qty = 50; cost = 14; }
+				else if ( ingot >= 256 ){ metal = "verite"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "verite", "", 0 ); qty = 45; cost = 16; }
+				else if ( ingot >= 128 ){ metal = "valorite"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "valorite", "", 0 ); qty = 40; cost = 18; }
+				else if ( ingot >= 64 ){ metal = "nepturite"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "nepturite", "", 0 ); qty = 35; cost = 20; }
+				else if ( ingot >= 32 ){ metal = "obsidian"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "obsidian", "", 0 ); qty = 30; cost = 22; }
+				else if ( ingot >= 16 ){ metal = "steel"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "steel", "", 0 ); qty = 25; cost = 24; }
+				else if ( ingot >= 8 ){ metal = "brass"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "brass", "", 0 ); qty = 20; cost = 26; }
+				else if ( ingot >= 4 ){ metal = "mithril"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "mithril", "", 0 ); qty = 15; cost = 28; }
+				else if ( ingot >= 2 ){ metal = "xormite"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "xormite", "", 0 ); qty = 10; cost = 30; }
+				else { metal = "dwarven"; steel = 0x50B5; hue = MaterialInfo.GetMaterialColor( "dwarven", "", 0 ); qty = 5; cost = 32; }
+
+				crate.CrateQty = Utility.RandomMinMax( qty*5, qty*15 );
+				crate.CrateItem = metal;
+				crate.Hue = hue;
+				crate.ItemID = steel;
+				crate.Name = "crate of " + metal + " ore";
+				crate.Weight = crate.CrateQty * 0.1;
+				CitizenCost = crate.CrateQty * cost;
+
+				string dug = "mined";
+				switch ( Utility.RandomMinMax( 0, 2 ) )
+				{
+					case 0:	dug = "mined"; break;
+					case 1:	dug = "dug up"; break;
+					case 2:	dug = "excavated"; break;
+				}
+
+				string sell = "willing to part with"; if (Utility.RandomBool() ){ sell = "willing to trade"; } else if (Utility.RandomBool() ){ sell = "willing to sell"; }
+				string cave = "cave"; if (Utility.RandomBool() ){ cave = "mine"; }
+
+				switch ( Utility.RandomMinMax( 0, 5 ) )
+				{
+					case 0:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ore I " + dug + " in a " + cave + " near " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 1:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ore I " + dug + " in a " + cave + " outside of " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 2:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ore I " + dug + " in a " + cave + " by " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 3:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ore I " + dug + " in a " + cave + " near " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 4:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ore I " + dug + " in a " + cave + " by " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 5:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + metal + " ore I " + dug + " in a " + cave + " outside of " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+				}
+				CitizenPhrase = CitizenPhrase + " You can look in my backpack to examine the ore if you wish. If you want to trade, then hand me the gold and I will give you the ore.";
+
+				PackItem( crate );
+			}
+			else if ( CitizenType == 24 && CitizenService == 24 )
+			{
+				dungeon = RandomThings.MadeUpDungeon();
+				city = RandomThings.MadeUpCity();
+
+				CrateOfReagents crate = new CrateOfReagents();
+
+				string reagent = "bloodmoss";
+				int bottle = 0x508E;
+
+				switch ( Utility.RandomMinMax( 0, 7 ) )
+				{
+					case 0:	bottle = 0x508E; reagent = "bloodmoss"; break;
+					case 1:	bottle = 0x508F; reagent = "black pearl"; break;
+					case 2:	bottle = 0x5098; reagent = "garlic"; break;
+					case 3:	bottle = 0x5099; reagent = "ginseng"; break;
+					case 4:	bottle = 0x509A; reagent = "mandrake root"; break;
+					case 5:	bottle = 0x509B; reagent = "nightshade"; break;
+					case 6:	bottle = 0x509C; reagent = "sulfurous ash"; break;
+					case 7:	bottle = 0x509D; reagent = "spider silk"; break;
+				}
+
+				crate.CrateQty = Utility.RandomMinMax( 400, 1200 );
+				crate.CrateItem = reagent;
+				crate.ItemID = bottle;
+				crate.Name = "crate of " + reagent + "";
+				crate.Weight = crate.CrateQty * 0.1;
+				CitizenCost = crate.CrateQty * 5;
+
+				string bought = "bought";
+				switch ( Utility.RandomMinMax( 0, 2 ) )
+				{
+					case 0:	bought = "acquired"; break;
+					case 1:	bought = "purchased"; break;
+					case 2:	bought = "bought"; break;
+				}
+				string found = "found";
+				switch ( Utility.RandomMinMax( 0, 2 ) )
+				{
+					case 0:	found = "found"; break;
+					case 1:	found = "discovered"; break;
+					case 2:	found = "came upon"; break;
+				}
+
+				string sell = "willing to part with"; if (Utility.RandomBool() ){ sell = "willing to trade"; } else if (Utility.RandomBool() ){ sell = "willing to sell"; }
+
+				switch ( Utility.RandomMinMax( 0, 5 ) )
+				{
+					case 0:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + reagent + " I " + found + " in " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 1:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + reagent + " I " + found + " deep within " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 2:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + reagent + " I " + found + " somewhere in " + dungeon + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 3:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + reagent + " I " + bought + " in " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 4:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + reagent + " I " + bought + " near " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+					case 5:	CitizenPhrase = phrase + " I have " + crate.CrateQty + " " + reagent + " I " + bought + " somewhere in " + city + " that I am " + sell + " for G~G~G~G~G gold."; break;
+				}
+				CitizenPhrase = CitizenPhrase + " You can look in my backpack to examine the reagents if you wish. If you want to trade, then hand me the gold and I will give you the reagents.";
+
+				PackItem( crate );
 			}
 
 			if ( CitizenType == 1 && CitizenService == 2 ){ PackItem( new reagents_magic_jar1() ); CitizenCost = Utility.RandomMinMax( 70, 150 )*10; }
@@ -418,49 +887,6 @@ namespace Server.Mobiles
 			if ( holding != "" ){ CitizenPhrase = CitizenPhrase + "<br><br>" + holding; } 
 			else if ( CitizenService == 5 ){ CitizenPhrase = null; }
 			else if ( ( CitizenService >= 2 && CitizenService <= 8 ) && CitizenType == 1 ){ CitizenPhrase = null; }
-
-			CantWalk = true;
-			Title = TavernPatrons.GetTitle();
-			Hue = Utility.RandomSkinColor();
-			Utility.AssignRandomHair( this );
-			SpeechHue = Utility.RandomTalkHue();
-			NameHue = Utility.RandomOrangeHue();
-			AI = AIType.AI_Citizen;
-			FightMode = FightMode.None;
-
-			SetStr( 386, 400 );
-			SetDex( 151, 165 );
-			SetInt( 161, 175 );
-
-			SetHits( 300, 400 );
-
-			SetDamage( 8, 10 );
-
-			SetDamageType( ResistanceType.Physical, 100 );
-
-			SetResistance( ResistanceType.Physical, 35, 45 );
-			SetResistance( ResistanceType.Fire, 25, 30 );
-			SetResistance( ResistanceType.Cold, 25, 30 );
-			SetResistance( ResistanceType.Poison, 10, 20 );
-			SetResistance( ResistanceType.Energy, 10, 20 );
-
-			SetSkill( SkillName.DetectHidden, 80.0 );
-			SetSkill( SkillName.Anatomy, 125.0 );
-			SetSkill( SkillName.Poisoning, 60.0, 82.5 );
-			SetSkill( SkillName.MagicResist, 83.5, 92.5 );
-			SetSkill( SkillName.Swords, 125.0 );
-			SetSkill( SkillName.Tactics, 125.0 );
-			SetSkill( SkillName.Wrestling, 100 );
-
-			Fame = 0;
-			Karma = 0;
-			VirtualArmor = 30;
-
-			int HairColor = Utility.RandomHairHue();
-			HairHue = HairColor;
-			FacialHairHue = HairColor;
-
-			if ( this is HouseVisitor && Backpack != null ){ Backpack.Delete(); }
 		}
 
 		public override void OnMovement( Mobile m, Point3D oldLocation )
@@ -564,8 +990,8 @@ namespace Server.Mobiles
 			for ( int i = 0; i < wanderers.Count; ++i )
 			{
 				Mobile person = ( Mobile )wanderers[ i ];
-				Effects.SendLocationParticles( EffectItem.Create( person.Location, person.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-				person.PlaySound( 0x1FE );
+				//Effects.SendLocationParticles( EffectItem.Create( person.Location, person.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+				//person.PlaySound( 0x1FE );
 				person.Delete();
 			}
 
@@ -620,8 +1046,8 @@ namespace Server.Mobiles
 						if ( mount ){ MountCitizens ( citizen, true ); }
 						citizen.Direction = dir1;
 						((BaseCreature)citizen).ControlSlots = 2;
-						Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-						citizen.PlaySound( 0x1FE );
+						//Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+						//citizen.PlaySound( 0x1FE );
 						Server.Items.EssenceBase.ColorCitizen( citizen );
 					}
 				}
@@ -640,8 +1066,8 @@ namespace Server.Mobiles
 						if ( mount ){ MountCitizens ( citizen, true ); }
 						citizen.Direction = dir2;
 						((BaseCreature)citizen).ControlSlots = 3;
-						Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-						citizen.PlaySound( 0x1FE );
+						//Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+						//citizen.PlaySound( 0x1FE );
 						Server.Items.EssenceBase.ColorCitizen( citizen );
 					}
 				}
@@ -660,8 +1086,8 @@ namespace Server.Mobiles
 						if ( mount ){ MountCitizens ( citizen, true ); }
 						citizen.Direction = dir3;
 						((BaseCreature)citizen).ControlSlots = 4;
-						Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-						citizen.PlaySound( 0x1FE );
+						//Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+						//citizen.PlaySound( 0x1FE );
 						Server.Items.EssenceBase.ColorCitizen( citizen );
 					}
 				}
@@ -680,8 +1106,8 @@ namespace Server.Mobiles
 						if ( mount ){ MountCitizens ( citizen, true ); }
 						citizen.Direction = dir4;
 						((BaseCreature)citizen).ControlSlots = 5;
-						Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-						citizen.PlaySound( 0x1FE );
+						//Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+						//citizen.PlaySound( 0x1FE );
 						Server.Items.EssenceBase.ColorCitizen( citizen );
 					}
 				}
@@ -762,8 +1188,8 @@ namespace Server.Mobiles
 			MountCitizens ( citizen, true );
 			citizen.Direction = direction;
 			((BaseCreature)citizen).ControlSlots = 2;
-			Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-			citizen.PlaySound( 0x1FE );
+			//Effects.SendLocationParticles( EffectItem.Create( citizen.Location, citizen.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+			//citizen.PlaySound( 0x1FE );
 		}
 
 		public static void MountCitizens ( Mobile m, bool includeDragyns )
@@ -986,8 +1412,8 @@ namespace Server.Mobiles
 			if ( this.Home.X > 0 && this.Home.Y > 0 && ( Math.Abs( this.X-this.Home.X ) > 2 || Math.Abs( this.Y-this.Home.Y ) > 2 || Math.Abs( this.Z-this.Home.Z ) > 2 ) )
 			{
 				this.Location = this.Home;
-				Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
-				Effects.PlaySound( this, this.Map, 0x201 );
+				//Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
+				//Effects.PlaySound( this, this.Map, 0x201 );
 			}
 		}
 
@@ -1063,6 +1489,7 @@ namespace Server.Mobiles
 						give = i;
 					}
 					give.Movable = true;
+					give.InvalidateProperties();
 					from.AddToBackpack( give );
 					CitizenService = 0;
 				}

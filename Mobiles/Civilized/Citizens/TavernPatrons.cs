@@ -13,11 +13,13 @@ namespace Server.Misc
 {
     class TavernPatrons
     {
-		public static void RemoveSomeGear( Mobile m )
+		public static void RemoveSomeGear( Mobile m, bool helm )
 		{
 			if ( m.FindItemOnLayer( Layer.OneHanded ) != null ) { m.FindItemOnLayer( Layer.OneHanded ).Delete(); }
 			if ( m.FindItemOnLayer( Layer.TwoHanded ) != null ) { m.FindItemOnLayer( Layer.TwoHanded ).Delete(); }
-			if ( m.FindItemOnLayer( Layer.Helm ) != null ) { if ( m.FindItemOnLayer( Layer.Helm ) is BaseArmor ){ m.FindItemOnLayer( Layer.Helm ).Delete(); } }
+			if ( m.FindItemOnLayer( Layer.FirstValid ) != null && m.FindItemOnLayer( Layer.FirstValid ) is BaseShield ) { m.FindItemOnLayer( Layer.FirstValid ).Delete(); }
+			if ( m.FindItemOnLayer( Layer.FirstValid ) != null && m.FindItemOnLayer( Layer.FirstValid ) is BaseWeapon ) { m.FindItemOnLayer( Layer.FirstValid ).Delete(); }
+			if ( m.FindItemOnLayer( Layer.Helm ) != null && helm ) { if ( m.FindItemOnLayer( Layer.Helm ) is BaseArmor ){ m.FindItemOnLayer( Layer.Helm ).Delete(); } }
 		}
 
 		public static string GetTitle()

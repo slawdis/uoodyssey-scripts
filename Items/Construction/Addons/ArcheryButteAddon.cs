@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Server;
 using Server.Network;
+using Server.Mobiles;
 
 namespace Server.Items
 {
@@ -74,7 +75,9 @@ namespace Server.Items
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			if ( (m_Arrows > 0 || m_Bolts > 0) && from.InRange( GetWorldLocation(), 1 ) )
+			if ( from is Citizens )
+				Shoot( from );
+			else if ( (m_Arrows > 0 || m_Bolts > 0) && from.InRange( GetWorldLocation(), 1 ) )
 				Gather( from );
 			else
 				Fire( from );
@@ -266,6 +269,30 @@ namespace Server.Items
 				PublicOverheadMessage( MessageType.Regular, 0x3B2, 1062719, se.Total.ToString() );
 			else
 				PublicOverheadMessage( MessageType.Regular, 0x3B2, 1042683, String.Format( "{0}\t{1}", se.Total, se.Count ) );
+		}
+
+		public void Shoot( Mobile from )
+		{
+			BaseRanged bow = from.Weapon as BaseRanged;
+
+			if ( bow == null )
+			{
+				return;
+			}
+
+			m_LastUse = DateTime.Now;
+
+			from.Direction = from.GetDirectionTo( GetWorldLocation() );
+			bow.PlaySwingAnimation( from );
+			from.MovingEffect( this, bow.EffectID, 18, 1, false, false );
+
+			if ( Utility.RandomBool() )
+			{
+				from.PlaySound( bow.MissSound );
+				return;
+			}
+
+			Effects.PlaySound( Location, Map, 0x2B1 );
 		}
 
 		public override void Serialize( GenericWriter writer )

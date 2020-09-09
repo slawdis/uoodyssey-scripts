@@ -2376,7 +2376,7 @@ namespace Server.Mobiles
 		{
 			public InternalBuyInfo()
 			{
-				Add( new GenericBuyInfo( typeof( FletcherTools ), 2, Utility.Random( 1,15 ), 0x1F2C, 0 ) );
+				Add( new GenericBuyInfo( typeof( FletcherTools ), 2, Utility.Random( 1,15 ), 0x1F2C, 0xB61 ) );
 				Add( new GenericBuyInfo( typeof( ArcherQuiver ), 32, Utility.Random( 1,5 ), 0x2B02, 0 ) );
 			}
 		}
@@ -4035,6 +4035,34 @@ namespace Server.Mobiles
 				if ( MyServerSettings.BuyChance() ){Add( typeof( VeriteBracelet ), Utility.Random( 11,16 ) ); } // DO NOT WANT?
 				if ( MyServerSettings.BuyChance() ){Add( typeof( VeriteRing ), Utility.Random( 11,16 ) ); } // DO NOT WANT?
 				if ( MyServerSettings.BuyChance() ){Add( typeof( VeriteEarrings ), Utility.Random( 11,16 ) ); } // DO NOT WANT?
+			}
+		}
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public class SBWarriorGuild : SBInfo
+	{
+		private List<GenericBuyInfo> m_BuyInfo = new InternalBuyInfo();
+		private IShopSellInfo m_SellInfo = new InternalSellInfo();
+
+		public SBWarriorGuild()
+		{
+		}
+
+		public override IShopSellInfo SellInfo { get { return m_SellInfo; } }
+		public override List<GenericBuyInfo> BuyInfo { get { return m_BuyInfo; } }
+
+		public class InternalBuyInfo : List<GenericBuyInfo>
+		{
+			public InternalBuyInfo()
+			{
+				Add( new GenericBuyInfo( "warhorse", typeof( Warhorse ), 10000, Utility.Random( 1,10 ), 0x55DC, 0 ) );
+			}
+		}
+
+		public class InternalSellInfo : GenericSellInfo
+		{
+			public InternalSellInfo()
+			{
 			}
 		}
 	}

@@ -207,6 +207,7 @@ namespace Server.Items
 				PremiumSpawner spawners = ( PremiumSpawner )spawns[ i ];
 				Server.Mobiles.PremiumSpawner.Reconfigure( spawners, DoAction );
 			}
+			Server.Items.WorkingSpots.PopulateVillages();
 		}
 	}
 }
@@ -447,8 +448,11 @@ namespace Server.Items
 			for ( int i = 0; i < healers.Count; ++i )
 			{
 				Mobile healer = ( Mobile )healers[ i ];
-				Effects.SendLocationParticles( EffectItem.Create( healer.Location, healer.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
-				healer.PlaySound( 0x1FE );
+				if ( !(healer is Citizens) )
+				{
+					Effects.SendLocationParticles( EffectItem.Create( healer.Location, healer.Map, EffectItem.DefaultDuration ), 0x3728, 10, 10, 2023 );
+					healer.PlaySound( 0x1FE );
+				}
 				healer.Delete();
 			}
 

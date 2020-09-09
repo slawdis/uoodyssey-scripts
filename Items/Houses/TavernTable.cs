@@ -146,7 +146,7 @@ namespace Server.Items
 					patron.MoveToWorld( location, table.Map );
 					patron.Direction = direction;
 					table.DrinkerNorth = patron;
-					Server.Misc.TavernPatrons.RemoveSomeGear( patron );
+					Server.Misc.TavernPatrons.RemoveSomeGear( patron, true );
 				}
 				else { table.PatronNorth = 0; }
 			}
@@ -160,7 +160,7 @@ namespace Server.Items
 					patron.MoveToWorld( location, table.Map );
 					patron.Direction = direction;
 					table.DrinkerSouth = patron;
-					Server.Misc.TavernPatrons.RemoveSomeGear( patron );
+					Server.Misc.TavernPatrons.RemoveSomeGear( patron, true );
 				}
 				else { table.PatronSouth = 0; }
 			}
@@ -174,7 +174,7 @@ namespace Server.Items
 					patron.MoveToWorld( location, table.Map );
 					patron.Direction = direction;
 					table.DrinkerEast = patron;
-					Server.Misc.TavernPatrons.RemoveSomeGear( patron );
+					Server.Misc.TavernPatrons.RemoveSomeGear( patron, true );
 				}
 				else { table.PatronEast = 0; }
 			}
@@ -188,7 +188,7 @@ namespace Server.Items
 					patron.MoveToWorld( location, table.Map );
 					patron.Direction = direction;
 					table.DrinkerWest = patron;
-					Server.Misc.TavernPatrons.RemoveSomeGear( patron );
+					Server.Misc.TavernPatrons.RemoveSomeGear( patron, true );
 				}
 				else { table.PatronWest = 0; }
 			}

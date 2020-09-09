@@ -905,6 +905,74 @@ namespace Server.Multis
 		}
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////
+	public class SmallLogCabinEast : BaseHouse
+	{
+		public static Rectangle2D[] AreaArray = new Rectangle2D[]{ new Rectangle2D( -3, -3, 8, 8 ) };
+
+		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.ThreeStoryFoundations[37]; } }
+		public override int ConvertOffsetY{ get{ return -1; } }
+
+		public override Rectangle2D[] Area{ get{ return AreaArray; } }
+		public override Point3D BaseBanLocation{ get{ return new Point3D( 4, -2, 0 ); } }
+
+		public SmallLogCabinEast( Mobile owner ) : base( 0x97, owner, 1, 1 )
+		{
+			SetSignFace( 4, -2, 5, 0x0BD1 );
+
+			AddHouseDoor( 3, 0, 5, 0x06AD );
+		}
+
+		public SmallLogCabinEast( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+			writer.Write( (int)0 );//version
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+			int version = reader.ReadInt();
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	public class SmallLogCabinSouth : BaseHouse
+	{
+		public static Rectangle2D[] AreaArray = new Rectangle2D[]{ new Rectangle2D( -3, -3, 8, 8 ) };
+
+		public override HousePlacementEntry ConvertEntry{ get{ return HousePlacementEntry.ThreeStoryFoundations[37]; } }
+		public override int ConvertOffsetY{ get{ return -1; } }
+
+		public override Rectangle2D[] Area{ get{ return AreaArray; } }
+		public override Point3D BaseBanLocation{ get{ return new Point3D( 2, 4, 0 ); } }
+
+		public SmallLogCabinSouth( Mobile owner ) : base( 0x99, owner, 1, 1 )
+		{
+			SetSignFace( 2, 4, 5, 0x0BD2 );
+
+			AddHouseDoor( 0, 3, 5, 0x06A5 );
+		}
+
+		public SmallLogCabinSouth( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+			writer.Write( (int)0 );//version
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+			int version = reader.ReadInt();
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////
 	public class NewSmallStoneHomeEast : BaseHouse
 	{
 		public static Rectangle2D[] AreaArray = new Rectangle2D[]{ new Rectangle2D( -3, -3, 8, 8 ) };

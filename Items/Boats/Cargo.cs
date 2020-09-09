@@ -377,7 +377,7 @@ namespace Server.Items
 					case 2: Name = "crate of ginseng";			CargoContains = "Ginseng";			break;
 					case 3: Name = "crate of mandrake root";	CargoContains = "MandrakeRoot";		break;
 					case 4: Name = "crate of nightshade";		CargoContains = "Nightshade";		break;
-					case 5: Name = "crate of sulphurous ash";	CargoContains = "SulfurousAsh";		break;
+					case 5: Name = "crate of sulfurous ash";	CargoContains = "SulfurousAsh";		break;
 					case 6: Name = "crate of spider silk";		CargoContains = "SpidersSilk";		break;
 					case 7: Name = "crate of bloodmoss";		CargoContains = "Bloodmoss";		break;
 					case 8: Name = "crate of black pearls";		CargoContains = "BlackPearl";		break;
@@ -588,7 +588,7 @@ namespace Server.Items
 					case 2: ItemID = 0x5099; Name = "crate of ginseng";				CargoContains = "Ginseng";			break;
 					case 3: ItemID = 0x509A; Name = "crate of mandrake root";		CargoContains = "MandrakeRoot";		break;
 					case 4: ItemID = 0x509B; Name = "crate of nightshade";			CargoContains = "Nightshade";		break;
-					case 5: ItemID = 0x509C; Name = "crate of sulphurous ash";		CargoContains = "SulfurousAsh";		break;
+					case 5: ItemID = 0x509C; Name = "crate of sulfurous ash";		CargoContains = "SulfurousAsh";		break;
 					case 6: ItemID = 0x509D; Name = "crate of spider silk";			CargoContains = "SpidersSilk";		break;
 					case 7: ItemID = 0x508E; Name = "crate of bloodmoss";			CargoContains = "Bloodmoss";		break;
 					case 8: ItemID = 0x508F; Name = "crate of black pearls";		CargoContains = "BlackPearl";		break;

@@ -126,6 +126,17 @@ namespace Server.Mobiles
 				from.SendMessage("Only grandmaster knights may ride this holy steed.");
 				return false;
 			}
+			else if ( this is Warhorse && (
+				from.Skills[SkillName.Tactics].Base < 100 && 
+				from.Skills[SkillName.Swords].Base < 100 && 
+				from.Skills[SkillName.Macing].Base < 100 && 
+				from.Skills[SkillName.Archery].Base < 100 && 
+				from.Skills[SkillName.Fencing].Base < 100 
+			))
+			{
+				from.SendMessage("Only grandmaster warriors may ride this warhorse.");
+				return false;
+			}
 			else if ( ( this is DeathKnightWarhorse ) && ( from.Skills[SkillName.Chivalry].Base < 100 || from.Karma > 0 ) )
 			{
 				from.SendMessage("Only grandmaster death knights may ride this evil steed.");
@@ -196,6 +207,12 @@ namespace Server.Mobiles
 				else if ( (this.GetType()).IsAssignableFrom(typeof(SkeletalMount)) ){ m_RegularID = 0x2617; m_MountedID = 0x3EBB; }
 				else if ( this is DeathKnightWarhorse ){ m_RegularID = 0x2617; m_MountedID = 0x3EBB; }
 				else if ( this is PaladinWarhorse ){ m_RegularID = 0x4C59; m_MountedID = 0x3EBE; }
+				else if ( this is Warhorse )
+				{
+					Hue = 0;
+					m_RegularID = 0x211F; m_MountedID = 0x3EA0; ItemID = 0x211F;
+					if ( Server.Misc.MyServerSettings.ClientVersion() ){ m_RegularID = 0x55DC; m_MountedID = 594; ItemID = 0x55DC; }
+				}
 				else if ( this is EtherealHorse ){ m_RegularID = 0x20DD; m_MountedID = 0x3EA0; }
 				else if ( this is EtherealLlama ){ m_RegularID = 0x20F6; m_MountedID = 0x3EA6; }
 				else if ( this is EtherealOstard ){ m_RegularID = 0x2135; m_MountedID = 0x3EA3; }
@@ -268,6 +285,7 @@ namespace Server.Mobiles
 				Weight = -1;
 
 			if ( Hue == 0 || Hue == 0x4001 ){ Hue = 2858; }
+			if ( this is Warhorse ){ Hue = 0; }
 		}
 
 		public override DeathMoveResult OnParentDeath( Mobile parent )
@@ -360,6 +378,7 @@ namespace Server.Mobiles
 			Movable = true;
 
 			if ( Hue == 0 || Hue == 0x4001 ){ Hue = 2858; }
+			if ( this is Warhorse ){ Hue = 0; }
 
 			if( bp != null )
 			{
@@ -387,6 +406,7 @@ namespace Server.Mobiles
 			Movable = false;
 
 			if ( Hue == 0 || Hue == 0x4001 ){ Hue = 2858; }
+			if ( this is Warhorse ){ Hue = 0; }
 
 			ProcessDelta();
 			m_Rider.ProcessDelta();

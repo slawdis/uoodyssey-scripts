@@ -642,6 +642,8 @@ namespace Server.Items
 			{
 				new HousePlacementEntry( typeof( BlueTent ), 							1041217, 	351, 	81, 	351, 	81, 	1, 	15000, 		0, 	4, 	0, 	0x70),
 				new HousePlacementEntry( typeof( GreenTent ), 							1041218, 	351, 	81, 	351, 	81, 	1, 	15000, 		0, 	4, 	0, 	0x72),
+				new HousePlacementEntry( typeof( SmallLogCabinSouth ), 					1030871, 	382, 	112, 	382, 	112, 	2, 	30000, 		0, 	4, 	0, 	0x99),
+				new HousePlacementEntry( typeof( SmallLogCabinEast ), 					1030871, 	382, 	112, 	382, 	112, 	2, 	30000, 		0, 	4, 	0, 	0x97),
 				new HousePlacementEntry( typeof( NewSmallStoneHomeEast ), 				1030845, 	382, 	112, 	382, 	112, 	2, 	30000, 		4,	-2,	0, 	0x5C),
 				new HousePlacementEntry( typeof( NewSmallStoneHouseEast ), 				1030848, 	382, 	112, 	382, 	112, 	2, 	30000, 		4,	-2,	0, 	0x5F),
 				new HousePlacementEntry( typeof( SmallOldHouse ), 						1011303, 	382, 	112, 	382, 	112, 	2, 	30000, 		0, 	4, 	0, 	0x64),
