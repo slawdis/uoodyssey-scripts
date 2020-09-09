@@ -13,6 +13,7 @@ namespace Server.Items
 		{
 			Name = "fletching tools";
 			Weight = 2.0;
+			Hue = 0xB61;
 		}
 
 		[Constructable]
@@ -20,6 +21,7 @@ namespace Server.Items
 		{
 			Name = "fletching tools";
 			Weight = 2.0;
+			Hue = 0xB61;
 		}
 
 		public FletcherTools( Serial serial ) : base( serial )
@@ -44,6 +46,7 @@ namespace Server.Items
 
 			ItemID = 0x1F2C;
 			Name = "fletching tools";
+			Hue = 0xB61;
 		}
 	}
 }

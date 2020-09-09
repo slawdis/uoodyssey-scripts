@@ -89,15 +89,15 @@ namespace Server.Engines.Craft
 			index = AddCraft( typeof( Kindling ), 1044457, "batch of kindling", 0.0, 00.0, typeof( Log ), 1015101, 1, 1044351 );
 			SetUseAllRes( index, true );
 
-			index = AddCraft( typeof( Shaft ), 1044457, 1027124, 0.0, 30.0, typeof( Log ), 1015101, 1, 1044351 );
+			index = AddCraft( typeof( Shaft ), 1044457, 1027124, 0.0, 40.0, typeof( Log ), 1015101, 1, 1044351 );
 			SetUseAllRes( index, true );
 
 			// Ammunition
-			index = AddCraft( typeof( Arrow ), 1044565, 1023903, 0.0, 30.0, typeof( Shaft ), 1044560, 1, 1044561 );
+			index = AddCraft( typeof( Arrow ), 1044565, 1023903, 0.0, 40.0, typeof( Shaft ), 1044560, 1, 1044561 );
 			AddRes( index, typeof( Feather ), 1044562, 1, 1044563 );
 			SetUseAllRes( index, true );
 
-			index = AddCraft( typeof( Bolt ), 1044565, 1027163, 25.0, 40.0, typeof( Shaft ), 1044560, 1, 1044561 );
+			index = AddCraft( typeof( Bolt ), 1044565, 1027163, 0.0, 40.0, typeof( Shaft ), 1044560, 1, 1044561 );
 			AddRes( index, typeof( Feather ), 1044562, 1, 1044563 );
 			SetUseAllRes( index, true );
 
@@ -109,24 +109,24 @@ namespace Server.Engines.Craft
 			}
 
 			// Weapons
-			AddCraft( typeof( Bow ), 1044566, 1025042, 45.0, 60.0, typeof( Log ), 1015101, 7, 1044351 );
-			AddCraft( typeof( Crossbow ), 1044566, 1023919, 35.0, 50.0, typeof( Log ), 1015101, 8, 1044351 );
-			AddCraft( typeof( HeavyCrossbow ), 1044566, 1025117, 85.0, 100.0, typeof( Log ), 1015101, 15, 1044351 );
+			AddCraft( typeof( Bow ), 1044566, 1025042, 30.0, 70.0, typeof( Log ), 1015101, 7, 1044351 );
+			AddCraft( typeof( Crossbow ), 1044566, 1023919, 60.0, 100.0, typeof( Log ), 1015101, 7, 1044351 );
+			AddCraft( typeof( HeavyCrossbow ), 1044566, 1025117, 80.0, 120.0, typeof( Log ), 1015101, 10, 1044351 );
 
 			if ( Core.AOS )
 			{
-				AddCraft( typeof( CompositeBow ), 1044566, 1029922, 55.0, 70.0, typeof( Log ), 1015101, 9, 1044351 );
-				AddCraft( typeof( RepeatingCrossbow ), 1044566, 1029923, 65.0, 80.0, typeof( Log ), 1015101, 10, 1044351 );
+				AddCraft( typeof( CompositeBow ), 1044566, 1029922, 70.0, 110.0, typeof( Log ), 1015101, 7, 1044351 );
+				AddCraft( typeof( RepeatingCrossbow ), 1044566, 1029923, 90.0, 130.0, typeof( Log ), 1015101, 10, 1044351 );
 			}
 
 			if( Core.SE )
 			{
-				index = AddCraft( typeof( Yumi ), 1044566, 1030224, 75.0, 90.0, typeof( Log ), 1015101, 11, 1044351 );
+				index = AddCraft( typeof( Yumi ), 1044566, 1030224, 90.0, 130.0, typeof( Log ), 1015101, 10, 1044351 );
 				SetNeededExpansion( index, Expansion.SE );
 			}
 
-			AddCraft( typeof( MagicalShortbow ), 1044566, "woodland shortbow", 25.0, 40.0, typeof( Log ), 1015101, 5, 1044351 );
-			AddCraft( typeof( ElvenCompositeLongbow ), 1044566, "woodland longbow", 95.0, 100.0, typeof( Log ), 1015101, 13, 1044351 );
+			AddCraft( typeof( MagicalShortbow ), 1044566, "woodland shortbow", 50.0, 80.0, typeof( Log ), 1015101, 7, 1044351 );
+			AddCraft( typeof( ElvenCompositeLongbow ), 1044566, "woodland longbow", 50.0, 80.0, typeof( Log ), 1015101, 7, 1044351 );
 
 			Repair = true;
 			MarkOption = true;

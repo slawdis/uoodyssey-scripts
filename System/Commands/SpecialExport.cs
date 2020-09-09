@@ -62,7 +62,7 @@ namespace Server.Misc
 				{
 					foreach(Item item in eable)
 					{
-						if ( item is MeetingSpots )
+						if ( ( item is MeetingSpots || item is WorkingSpots ) && item.Weight > 0 )
 						{
 							string s = Construct(item);
 							if( !s.Substring(0, s.IndexOf(' ')+1).Contains("+") ) // Make sure this isn't an InternalItem of a class...

@@ -19,7 +19,7 @@ namespace Server.Mobiles
 		public override void OnAfterSpawn()
 		{
 			base.OnAfterSpawn();
-			Server.Misc.TavernPatrons.RemoveSomeGear( this );
+			Server.Misc.TavernPatrons.RemoveSomeGear( this, true );
 			Server.Misc.MorphingTime.CheckNecromancer( this );
 			Server.Items.EssenceBase.ColorCitizen( this );
 		}
@@ -51,7 +51,7 @@ namespace Server.Mobiles
 		public override void OnAfterSpawn()
 		{
 			base.OnAfterSpawn();
-			Server.Misc.TavernPatrons.RemoveSomeGear( this );
+			Server.Misc.TavernPatrons.RemoveSomeGear( this, true );
 			Server.Misc.MorphingTime.CheckNecromancer( this );
 			Server.Items.EssenceBase.ColorCitizen( this );
 		}
@@ -83,7 +83,7 @@ namespace Server.Mobiles
 		public override void OnAfterSpawn()
 		{
 			base.OnAfterSpawn();
-			Server.Misc.TavernPatrons.RemoveSomeGear( this );
+			Server.Misc.TavernPatrons.RemoveSomeGear( this, true );
 			Server.Misc.MorphingTime.CheckNecromancer( this );
 			Server.Items.EssenceBase.ColorCitizen( this );
 		}
@@ -115,7 +115,7 @@ namespace Server.Mobiles
 		public override void OnAfterSpawn()
 		{
 			base.OnAfterSpawn();
-			Server.Misc.TavernPatrons.RemoveSomeGear( this );
+			Server.Misc.TavernPatrons.RemoveSomeGear( this, true );
 			Server.Misc.MorphingTime.CheckNecromancer( this );
 			Server.Items.EssenceBase.ColorCitizen( this );
 		}

@@ -1853,7 +1853,7 @@ namespace Server.Misc
 					cloth4.Hue = aHue;
 					m.AddItem( cloth4 );
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 || race == "undead " )
+				if ( Utility.RandomBool() || race == "undead " )
 				{
 					Item glove = new PlateGloves();
 						glove.Hue = aHue;
@@ -1875,7 +1875,7 @@ namespace Server.Misc
 					cloth4.Hue = aHue;
 					m.AddItem( cloth4 );
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 || race == "undead " )
+				if ( Utility.RandomBool() || race == "undead " )
 				{
 					Item glove = new RingmailGloves();
 						glove.Hue = aHue;
@@ -1898,7 +1898,7 @@ namespace Server.Misc
 					cloth4.Hue = lHue;
 					m.AddItem( cloth4 );
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 || race == "undead " )
+				if ( Utility.RandomBool() || race == "undead " )
 				{
 					Item glove = new StuddedGloves();
 						glove.Hue = lHue;
@@ -1912,11 +1912,20 @@ namespace Server.Misc
 
 				hHue = lHue;
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 )
+				if ( Utility.RandomBool() )
 				{
-					Item cloth1 = new LoinCloth();
-						cloth1.Hue = lHue;
-						m.AddItem( cloth1 );
+					if ( Utility.RandomBool() )
+					{
+						Item cloth1 = new LoinCloth();
+							cloth1.Hue = lHue;
+							m.AddItem( cloth1 );
+					}
+					else
+					{
+						Item cloth1 = new RoyalLoinCloth();
+							cloth1.Hue = lHue;
+							m.AddItem( cloth1 );
+					}
 				}
 				else
 				{
@@ -1960,7 +1969,7 @@ namespace Server.Misc
 					cloth3.Hue = lHue;
 					m.AddItem( cloth3 );
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 || race == "undead " )
+				if ( Utility.RandomBool() || race == "undead " )
 				{
 					Item glove = new LeatherGloves();
 						glove.Hue = lHue;
@@ -1998,7 +2007,7 @@ namespace Server.Misc
 					cloth4.Hue = lHue;
 					m.AddItem( cloth4 );
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 || race == "undead " )
+				if ( Utility.RandomBool() || race == "undead " )
 				{
 					Item glove = new LeatherGloves();
 						glove.Hue = lHue;
@@ -2011,7 +2020,7 @@ namespace Server.Misc
 			if ( iArmor == 4 && Utility.RandomBool() ) { m.AddItem( new BarbarianBoots( Utility.RandomNeutralHue() ) ); }
 			else { m.AddItem( new Boots( Utility.RandomNeutralHue() ) ); }
 
-			if ( Utility.RandomMinMax( 1, 2 ) == 2 && iArmor != 5 ){ CanHaveHelm = 1; }
+			if ( Utility.RandomBool() && iArmor != 5 ){ CanHaveHelm = 1; }
 			if ( race == "undead " && m.Hue != 0x430 ){ CanHaveHelm = 1; }
 			if ( race == "undead " && m.Hue == 0x430 ){ CanHaveHelm = 0; }
 
@@ -2174,7 +2183,7 @@ namespace Server.Misc
 					cloth4.Hue = clothHue;
 					m.AddItem( cloth4 );
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 )
+				if ( Utility.RandomBool() )
 				{
 					Item glove = new LeatherGloves();
 						glove.Hue = clothHue;
@@ -2312,7 +2321,7 @@ namespace Server.Misc
 						m.AddItem( cloth2 );
 				}
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 )
+				if ( Utility.RandomBool() )
 				{
 					Item glove = new LeatherGloves();
 						glove.Hue = clothHue;
@@ -2336,7 +2345,7 @@ namespace Server.Misc
 
 			if ( m is Brigand ){ m.Title = "the " + race + "brigand"; }
 
-			if ( Utility.RandomMinMax( 1, 2 ) == 2 || m.Title == "the " + race + "ninja" )
+			if ( Utility.RandomBool() || m.Title == "the " + race + "ninja" )
 			{
 				int myHat = Utility.RandomMinMax( 0, 1 );
 				if ( m.Body == 605 && myHelm == 7 ){ myHelm = 8; }
@@ -3062,7 +3071,7 @@ namespace Server.Misc
 						m.AddItem( piece2 );
 				}
 
-				if ( Utility.RandomMinMax( 1, 2 ) == 2 )
+				if ( Utility.RandomBool() )
 				{
 					Item cloth1 = new LoinCloth();
 						cloth1.Hue = 0x83B;

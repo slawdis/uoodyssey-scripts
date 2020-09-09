@@ -8098,8 +8098,8 @@ namespace Server.Mobiles
 				Combatant == null )
 			{
 				this.Location = this.Home;
-				Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
-				Effects.PlaySound( this, this.Map, 0x201 );
+				//Effects.SendLocationParticles( EffectItem.Create( this.Location, this.Map, EffectItem.DefaultDuration ), 0x3728, 8, 20, 5042 );
+				//Effects.PlaySound( this, this.Map, 0x201 );
 			}
 			else if ( WhisperHue == 999 && CanSwim && !(CanOnlyMoveOnSea( this )) && !CantWalk && Combatant == null && !Hidden && !Server.Mobiles.BasePirate.IsSailor( this ) ) // DIVE UNDER WATER AND WAIT FOR VICTIM
 			{

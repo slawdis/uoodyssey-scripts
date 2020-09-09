@@ -27,7 +27,7 @@ namespace Server.Mobiles
 		public override void OnAfterSpawn()
 		{
 			base.OnAfterSpawn();
-			Server.Misc.TavernPatrons.RemoveSomeGear( this );
+			Server.Misc.TavernPatrons.RemoveSomeGear( this, true );
 		}
 
 		public override void Serialize( GenericWriter writer )

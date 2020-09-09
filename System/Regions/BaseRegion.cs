@@ -102,6 +102,12 @@ namespace Server.Regions
 
 		public override bool AllowHarmful( Mobile from, Mobile target )
 		{
+			if ( from is Warriors && !(target is Warriors) )
+				return false;
+
+			if ( !(from is Warriors) && target is Warriors )
+				return false;
+
 			if ( from is BaseCreature )
 			{
 				BaseCreature bc = (BaseCreature)from;

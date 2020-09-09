@@ -16569,6 +16569,7 @@ namespace Server.Scripts.Commands
 
 			Server.Mobiles.Citizens.PopulateCities();
 			Server.Items.TavernTable.PopulateHomes();
+			Server.Items.WorkingSpots.PopulateVillages();
 
 			Server.Items.StealableArtifactsSpawner.RemoveStealArties_OnCommand( e );
 			Server.Items.StealableArtifactsSpawner.GenStealArties_OnCommand( e );

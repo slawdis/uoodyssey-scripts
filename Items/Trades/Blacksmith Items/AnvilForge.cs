@@ -38,6 +38,7 @@ namespace Server.Items
 		public Forge() : base( 0xFB1 )
 		{
 			Movable = false;
+			Light = LightType.Circle225;
 		}
 
 		public Forge( Serial serial ) : base( serial )
